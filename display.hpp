@@ -58,11 +58,19 @@ namespace fastsim
     {
       _blit_map();
     }
+
+    int save_BMP(const char *file) {
+      return SDL_SaveBMP(_screen,file);
+    }
 #else
     Display(const boost::shared_ptr<Map>& m, const Robot& r) : _map(m), _robot(r) {}
     ~Display() {}
     void update(){}
     void update_map(){}
+    int save_BMP(const char *file) {
+      return 0;
+    }
+
 #endif
   protected:
     const boost::shared_ptr<Map>& _map;
@@ -128,6 +136,7 @@ namespace fastsim
 		    Uint32 color,
 		    int x, int y);
     
+
     //
     Uint32 _color_from_id(SDL_Surface* surf, int id);
     // disp sensor values
