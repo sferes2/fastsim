@@ -2,18 +2,17 @@
 #include "simu_fastsim.hpp"
 
 using namespace sferes;
-struct Params
-{
-  struct simu
-  {
+struct Params {
+  struct simu {
     SFERES_STRING(map_name, "modules/fastsim/cuisine.pbm");
+    SFERES_CONST float dt = 0.01;
   };
 };
 
+#ifdef USE_SDL
 
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
   using namespace fastsim;
   typedef simu::Fastsim<Params> simu_t;
   simu_t s;
@@ -37,21 +36,23 @@ int main(int argc, char *argv[])
   s.init_view();
 
   int numkey;
-  while(true)
-    {
-      SDL_PumpEvents();
-      Uint8* keys = SDL_GetKeyState(&numkey);
-      if (keys[SDLK_UP])
-	s.move_robot(1.0, 1.0);
-      if (keys[SDLK_DOWN])
-	s.move_robot(-1.0, -1.0);
-      if (keys[SDLK_LEFT])
-       	s.move_robot(1.0, -1.0);
-      if (keys[SDLK_RIGHT])
-       	s.move_robot(-1.0, 1.0);
-      s.refresh();
-      s.refresh_view();
-    }
+  while(true) {
+    SDL_PumpEvents();
+    Uint8* keys = SDL_GetKeyState(&numkey);
+    if (keys[SDLK_UP])
+      s.move_robot(1.0, 1.0);
+    if (keys[SDLK_DOWN])
+      s.move_robot(-1.0, -1.0);
+    if (keys[SDLK_LEFT])
+      s.move_robot(1.0, -1.0);
+    if (keys[SDLK_RIGHT])
+      s.move_robot(-1.0, 1.0);
+    s.refresh();
+    s.refresh_view();
+  }
 
   return 0;
 }
+#else
+# warning FASTSIM_KEYBOARD not compiled because SDL was not activated
+#endif
