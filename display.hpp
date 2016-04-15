@@ -54,11 +54,16 @@ namespace fastsim {
     void update_map() {
       _blit_map();
     }
+
+    int save_BMP(const char *file) {
+      return SDL_SaveBMP(_screen,file);
+    }
 #else
     Display(const boost::shared_ptr<Map>& m, const Robot& r) : _map(m), _robot(r) {}
     ~Display() {}
     void update() {}
     void update_map() {}
+    int save_BMP(const char *file) { assert(0); }
 #endif
    protected:
     const boost::shared_ptr<Map>& _map;

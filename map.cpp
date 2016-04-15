@@ -21,6 +21,7 @@
 */
 
 #include <iostream>
+#include <sstream>
 #include "map.hpp"
 
 namespace fastsim {
@@ -29,9 +30,23 @@ namespace fastsim {
     std::ifstream ifs(fname.c_str());
     if (!ifs.good())
       throw Exception(std::string("cannot open map :") + fname);
-    ifs >> str >> _w >> _h;
+
+    ifs >>str;
     if (str != "P4")
       throw Exception("wrong file type for map");
+    char line[256];
+    ifs.getline(line,256);
+    while ((line[0]=='\0')||(line[0] == '#')) {
+      ifs.getline(line,256);
+    }
+    std::istringstream istr(line);
+    istr>> _w>>_h;
+    if ((_w<=0)||(_h<=0)) {
+      std::cerr<<"ERROR: the size of your map is not valid. There may be a problem with your file."<<std::endl;
+      std::cerr<<" w="<<_w<<" h="<<_h<<std::endl;
+      std::cerr<<" file="<<fname<<std::endl;
+      exit(1);
+    }
     _data.resize(_w * _h);
     if (_w % 8 != 0)
       throw Exception("wrong map size");
@@ -39,9 +54,10 @@ namespace fastsim {
     char buffer[k];
 
     ifs.read((char*)buffer, k);
-    for (int i = 0; i < k - 1; ++i)
+    for (int i = 0; i < k; ++i)
       for (int j = 0; j < 8; ++j)
         _data[i * 8 + j] = _get_bit(buffer[i + 1], j) ? obstacle : free;
+
   }
 
   // we use the "triangle method"
