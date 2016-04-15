@@ -1,10 +1,6 @@
-
-#ifndef APPLE
+#ifndef  __APPLE__
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE fastsim
-
-
-
 #include <boost/test/unit_test.hpp>
 #endif
 
@@ -21,7 +17,7 @@ struct Params {
   };
 };
 
-
+#ifndef __APPLE__
 BOOST_AUTO_TEST_CASE(fastsim_intersection) {
   using namespace fastsim;
   typedef simu::Fastsim<Params> simu_t;
@@ -53,8 +49,9 @@ BOOST_AUTO_TEST_CASE(fastsim_intersection) {
   //     s.refresh_view();
   //   }
 }
+#endif
 
-#ifdef APPLE
+#ifdef __APPLE__
 int main(int argc, char *argv[]) {
   std::cout<<"WARNING: BOOST TEST framework desactivated on macos to avoid problems with SDL."<<std::endl;
 #else
@@ -103,7 +100,7 @@ BOOST_AUTO_TEST_CASE(fastsim_simu_refresh) {
     s.refresh();
     s.refresh_view();
   }
-#ifdef APPLE
+#ifdef __APPLE__
   return 0;
 #endif
 }

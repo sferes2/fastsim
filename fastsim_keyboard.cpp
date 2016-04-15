@@ -9,6 +9,7 @@ struct Params {
   };
 };
 
+#ifdef USE_SDL
 
 
 int main(int argc, char *argv[]) {
@@ -52,3 +53,6 @@ int main(int argc, char *argv[]) {
 
   return 0;
 }
+#else
+# warning FASTSIM_KEYBOARD not compiled because SDL was not activated
+#endif

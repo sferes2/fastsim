@@ -23,7 +23,6 @@
 #include <bitset>
 
 #ifdef USE_SDL
-
 namespace fastsim {
 
   void Display :: _events() {
@@ -485,4 +484,6 @@ namespace fastsim {
 
 }
 
+#else
+#warning "SDL is disabled (no display for fastim)""
 #endif
