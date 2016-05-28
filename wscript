@@ -23,7 +23,7 @@ def build(bld):
         source = 'test_fastsim.cpp',
         includes = '. ../../',
         use = 'sferes2 fastsim',
-        uselib = 'BOOST_UNIT_TEST_FRAMEWORK SDL',
+        uselib = 'BOOST BOOST_UNIT_TEST_FRAMEWORK SDL',
         target = 'test_fastsim')
 
 
