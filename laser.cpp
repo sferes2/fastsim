@@ -41,10 +41,9 @@ namespace fastsim {
 
     _x_pixel = m->real_to_pixel(x2), _y_pixel = m->real_to_pixel(y2);
 
-    bool inter = m->check_inter_pixel(xx1, yy1, xx2, yy2, _x_pixel, _y_pixel);
+    bool inter = m->check_inter_pixel(yy1, xx1, yy2, xx2, _y_pixel, _x_pixel);
     // _x_pixel = std::min(std::max(0, _x_pixel), (int)m->get_pixel_w());
-    // _y_pixel = std::min(std::max(0, _y_pixel), (int)m->get_pixel_h())
-    ;
+    // _y_pixel = std::min(std::max(0, _y_pixel), (int)m->get_pixel_h());
     assert(_x_pixel >= 0);
     assert(_y_pixel >= 0);
 
