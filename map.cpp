@@ -56,7 +56,7 @@ namespace fastsim {
     ifs.read((char*)buffer, k);
     for (int i = 0; i < k; ++i)
       for (int j = 0; j < 8; ++j)
-        _data[i * 8 + j] = _get_bit(buffer[i + 1], j) ? obstacle : free;
+        _data[i * 8 + j] = _get_bit(buffer[i], j) ? obstacle : free;
 
   }
 
