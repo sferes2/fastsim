@@ -35,6 +35,10 @@ namespace sferes {
       void refresh_map_view() {
         _display->update_map();
       }
+      void set_map(const std::string map_name) {
+	_map->terrain_switch(map_name);
+      }
+
       void switch_map() {
         _map->terrain_switch(Params::simu::alt_map_name());
       }
